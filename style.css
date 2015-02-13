@@ -1,0 +1,46 @@
+#pageheader1{
+	background:rgba(255,0,255,0.5);
+}
+
+#planningWindow{
+	background:rgba(255,0,255,0.5);
+	top:400px;
+	height:175px;
+
+}
+
+.full {
+  background: url(images/fugu.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#start{
+	left:30px;
+}
+
+#leftSide{
+	background:rgba(255,0,255,0.5);
+	height:200px;
+}
+
+#rightSide{
+	background:rgba(125,0,255,0.5);
+	height:200px;
+}
+
+#peoplePlannerView{
+	background:rgba(255,255,255,1);
+	border-style:solid;
+	
+}
+
+.panel-body {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.recipePanel {
+	padding:10px;
+}

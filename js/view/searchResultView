@@ -1,0 +1,14 @@
+//ExampleView Object constructor
+var SearchResultView = function (container, model) {
+	
+	// Get all the relevant elements of the view (ones that show data
+  	// and/or ones that responed to interaction)
+	this.searchResultContainer = container.find("#searchResultView");
+	this.allDishes = model.getAllDishes(model.getSearchDish());
+
+	console.debug(this.allDishes);
+	
+	
+	
+}
+ 

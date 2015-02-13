@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dinner planner</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <LINK href="style.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body class="full">
+
+
+	  	<div class="jumbotron" id="pageheader1">
+		   <h1>Homelette
+		      <small>From the best cucks in the world, directly in to your kitchen</small>
+		</div>
+
+	  <div class="row">
+        <div class="col-xs-2 example-block" id="leftSide">
+        	<div class="row">
+        		<div class="col-xs-12 example-block" id="peoplePlannerView">
+        			<h2>My Dinner</h2>
+        			<div id="exampleView">
+						<div>
+							Number of guests: <span id="numberOfGuests"></span>
+						</div>
+						<div>
+	          				<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+							<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+						</div>
+					</div>
+        		</div>
+     		</div>
+     		<div class="row">
+     			<div class="col-xs-12 example-block" >
+     				<div id="mealListView">
+	     				<table class="table table-striped">
+	 					  <tr class="peoplePlannerView">
+						    <td>Dish Name</td> 
+						    <td>Price</td>
+						  </tr>
+						  <tr>
+						  </tr>
+						</table>
+					</div>
+     			</div>
+     		</div>
+     		<div class="row">
+        		<div class="col-xs-12 example-block" id="confirmPurchaseView">
+        			<div id="confirmPurchaseView">
+						<div>
+							<h2>Total: <span id="totalMealCost"></span>
+						</div>
+						<div>
+	          				<button id="minusGuest" class="btn">Confirm</span></button>
+						</div>
+					</div>
+        		</div>
+     		</div>
+        </div>
+
+        <!--Right side-->
+        <div class="col-xs-10 example-block alt" id="rightSide">
+        	<!--Upper portion-->
+        	<div class="row">
+        		<div class="col-xs-12 example-block">
+        			<div id="searchBarView">
+						<div>
+							<h2>SELECT DISH:
+						</div>
+						<div>
+	          				<input type="text" class="input-medium search-query" name="s" placeholder="Search" value="">
+						</div>
+						
+					</div>
+        		</div>
+        		<div class="col-xs-12 example block alt">
+        			<div class="dropdown">
+        				<div id="dropDownView">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+						   Choose Dish
+
+						   <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="menuSelection">
+						  </ul>
+						</div>
+					</div>
+        		</div>
+     		</div>
+
+     		<!--Lower portion-->
+     		<div class="row">
+     			<div id="searchResultView">
+
+     			</div>
+     		</div>
+        </div>
+      </div>
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+	<!-- The application JavaScript code -->
+	<script src="js/app.js"></script>
+	<script src="js/model/dinnerModel.js"></script>
+	<script src="js/view/exampleView.js"></script>
+	<script src="js/view/searchView.js"></script>
+	<script src="js/view/searchResultView.js"></script>
+	<script src="js/view/exampleViewController.js"></script>
+  </body>
+</html>
