@@ -5,7 +5,11 @@ var DinnerModel = function() {
 	// and selected dinner options for dinner menu
 	var self = this;
 	this.numberOfGuests = 4;
-	this.selectedDishes = []
+	this.selectedDishes = {
+		'starter':0,
+		'main dish':0,
+		'dessert':0
+	};
 	//Id of currentyl selectedDish
 	this.currentDish = 1;
 

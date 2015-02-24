@@ -42,29 +42,25 @@ var SideSummaryView = function(container , model){
 		mealTable.innerHTML = "<tr>\
 								<td><b>Name</b></td>\
 								<td><b>Price</b></td>\
-							  </tr>\
-							  <tr>\
-								<td><b></b></td>\
-								<td><b></b></td>\
-							  </tr>\
-							  <tr>\
-								<td><b></b></td>\
-								<td><b></b></td>\
-							  </tr>\
-							  <tr>\
-								<td><b></b></td>\
-								<td><b></b></td>\
-							  </tr>\
-							  ";
+							</tr>";
 		self.mealListView.append(mealTable);
 
 		
 	}
 
 	this.updateMealListView = function(dish){
-		self.mealListView.find("#mealTable").append("<tr><td>"+dish.name+"</td>\
+		
+		var row = document.getElementById(dish.type+"Row");
+		if(row){
+			row.innerHTML = "<td>"+dish.name+"</td>\
+							 <td>"+model.getDishPrice(dish.id)+"SEK </td>"
+		}else{
+			self.mealListView.find("#mealTable").append("<tr id='"+dish.type+"Row'><td>"+dish.name+"</td>\
 													 <td>"+model.getDishPrice(dish.id)+"SEK </td></tr>");
-		self.mealListView.find("#totalMealCost").html(model.getFullMenuCost())
+		}
+		
+		self.confirmPurchaseView.find("#totalMealCost").html(model.getTotalMenuPrice());
+
 	}
 
 	this.createConfirmPurchaseView = function(){
