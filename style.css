@@ -29,14 +29,8 @@
 	left:30px;
 }
 
-#leftSide{
-	background:rgba(255,0,255,0.5);
-	height:200px;
-}
-
-#rightSide{
-	background:rgba(125,0,255,0.5);
-	height:200px;
+#starterButton{
+	position: relative;
 }
 
 #peoplePlannerView{
@@ -85,4 +79,9 @@
 
 .totalPriceDiv{
 	border-left:1px solid;
+}
+
+.background{
+	background:white;
+	padding:25px;
 }

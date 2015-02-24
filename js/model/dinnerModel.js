@@ -3,19 +3,36 @@ var DinnerModel = function() {
  
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
-
+	var self = this;
 	this.numberOfGuests = 4;
 	this.selectedDishes = {
 		'starter':1,
-		'main dish':2,
-		'dessert':2
+		'main dish':1,
+		'dessert':0
 	};
+
+	var notificationEnum = {
+		newSearchResult: "newSearchResult",
+		numberOfGuestsChange: "numberOfGuestsChange"
+	}
+
+	this.observers = [];
+
+	this.addObserver = function(obs){
+		self.observers.push(obs);
+	}
+
+	var notifyObservers = function(obj){
+		 $.each(self.observers, function(index, value){
+		 	value.update(obj);
+		 })
+	}
 
 	this.searchDish = "main dish";
 
 
 
-	var self = this;
+	
 
 	this.getSearchDish = function(){
 		return self.searchDish;
@@ -23,10 +40,12 @@ var DinnerModel = function() {
 
 	this.setSearchDish = function(type){
 		self.searchDish = type;
+		notifyObservers(notificationEnum.newSearchResult);
 	}
 
 	this.setNumberOfGuests = function(num) {
 		self.numberOfGuests = num;
+		notifyObservers(notificationEnum.numberOfGuestsChange);
 		//TODO Lab 2
 	}
 
@@ -55,17 +74,20 @@ var DinnerModel = function() {
 
 	//Returns all ingredients for all the dishes on the menu.
 	this.getAllIngredients = function() {
+		//return array
 		var ingredients = {
 			'starter':1,
 			'mainDish':1,
 			'dessert':1
 		};
 		for(dish in self.selectedDishes){
-			var dishIngredients = self.getDish(self.selectedDishes[dish]);
-			ingredients[dish] = dishIngredients.ingredients;
+			if(!(self.selectedDishes[dish] == 0)){
+				var dishIngredients = self.getDish(self.selectedDishes[dish]);
+				ingredients[dish] = dishIngredients.ingredients;
+			}
+			
 		}
 		return ingredients;
-		//TODO Lab 2
 	}
 
 	//Returns the total price of the menu (all the ingredients multiplied by number of guests).

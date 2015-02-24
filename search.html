@@ -18,78 +18,31 @@
 		   <h1>Homelette
 		      <small>From the best cucks in the world, directly in to your kitchen</small>
 		</div>
-
+	<div class="container-fluid">
 	  <div class="row">
-        <div class="col-xs-2 example-block" id="leftSide">
-        	<div class="row">
-        		<div class="col-xs-12 example-block" id="peoplePlannerView">
-        			<h2>My Dinner</h2>
-        			<div id="exampleView">
-						<div>
-							Number of guests: <span id="numberOfGuests"></span>
-						</div>
-						<div>
-	          				<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
-							<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
-						</div>
-					</div>
-        		</div>
+    	<div class="col-xs-2 example-block" id="sideSummaryView">
+        	<div class="row" id="peoplePlannerView">
+
      		</div>
-     		<div class="row">
-     			<div class="col-xs-12 example-block" >
-     				<div id="mealListView">
-	     				<table class="table table-striped">
-	 					  <tr class="peoplePlannerView">
-						    <td>Dish Name</td> 
-						    <td>Price</td>
-						  </tr>
-						  <tr>
-						  </tr>
-						</table>
-					</div>
-     			</div>
+
+     		<div class="row" id="mealListView">
      		</div>
-     		<div class="row">
-        		<div class="col-xs-12 example-block" id="confirmPurchaseView">
-        			<div id="confirmPurchaseView">
-						<div>
-							<h2>Total: <span id="totalMealCost"></span>
-						</div>
-						<div>
-	          				<button id="minusGuest" class="btn">Confirm</span></button>
-						</div>
-					</div>
-        		</div>
+
+     		<div class="row" id="confirmPurchaseView">
+        			
      		</div>
-        </div>
+ 		</div>
 
         <!--Right side-->
         <div class="col-xs-10 example-block alt" id="rightSide">
         	<!--Upper portion-->
-        	<div class="row">
-        		<div class="col-xs-12 example-block">
-        			<div id="searchBarView">
-						<div>
-							<h2>SELECT DISH:
-						</div>
-						<div>
-	          				<input type="text" class="input-medium search-query" name="s" placeholder="Search" value="">
-						</div>
-						
-					</div>
-        		</div>
-        		<div class="col-xs-12 example block alt">
-        			<div class="dropdown">
-        				<div id="dropDownView">
-						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-						   Choose Dish
+        	<div id="searchBarView">
+	        	<div class="row" id="searchBar">
+     			</div>
 
-						   <span class="caret"></span>
-						  </button>
-						  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="menuSelection">
-						  </ul>
-						</div>
-					</div>
+	        		
+        		<div class="row" id="dropDownMenu">
+        			
         		</div>
      		</div>
 
@@ -100,6 +53,7 @@
      			</div>
      		</div>
         </div>
+      </div>
       </div>
 
 
@@ -115,6 +69,8 @@
 	<script src="js/view/searchView.js"></script>
 	<script src="js/view/searchResultView.js"></script>
 	<script src="js/view/recipeView.js"></script>
-	<script src="js/view/exampleViewController.js"></script>
+	<script src="js/view/sideSummaryView.js"></script>
+	<script src="js/controller/sideSummaryController.js"></script>
+	<script src="js/controller/searchViewController.js"></script>
   </body>
 </html>
