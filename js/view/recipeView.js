@@ -1,81 +1,133 @@
 //ExampleView Object constructor
 var RecipeView = function (container, model) {
 	
-	// Get all the relevant elements of the view (ones that show data
-  	// and/or ones that responed to interaction)
-	//this.searchResultContainer = container.find("#searchResultView");
-	this.selectedDish = model.getSelectedDish(model.getSearchDish());
+	var self = this;
+
 	this.leftSide = container.find("#recipeLeftSide");
 	this.rightSide = container.find("#recipeRightSide");
 
 
-	var dish = model.getDish(model.getSelectedDish(model.getSearchDish()));
 
-	//SET UP RIGHT SIDE
+	model.addObserver(this);
 
-	var recipePanel = document.createElement('div');
-	recipePanel.className = "panel panel-default";
+	this.update = function(obj){
+		if(obj == model.notificationEnum.numberOfGuestsChange){
+			self.rightSide.find("#ingredientsHeader").html("INGREDIENTS FOR "+model.getNumberOfGuests()+" PEOPLE");
+			self.rightSide.find("#tableDiv").html(self.createRecipeTable(model.getDish(model.getCurrentDish())));
+		}else if(obj == model.notificationEnum.currentDishChange){
 
- 	var panelBody = document.createElement('div');
- 	var panelHeading = document.createElement('div');
+			
+			self.leftSide.find("#dishTitleAndDescriptionDiv").html(self.createRecipeDescription(model.getDish(model.getCurrentDish())));
+			self.rightSide.find("#tableDiv").html(self.createRecipeTable(model.getDish(model.getCurrentDish())));
+		}
+	}
 
- 	panelHeading.className = "panel-heading";
- 	panelHeading.innerHTML = "INGREDIENTS FOR "+model.getNumberOfGuests()+" PEOPLE";
+	this.hideView = function(){
+		container.hide();
+	}
 
- 	//create recipe table
- 	var recipeTable = document.createElement('table');
- 	recipeTable.className = "table";
- 	var currentDishIngredients = dish.ingredients;
- 	for(var i = 0; i < currentDishIngredients.length; i++){
- 		console.debug(currentDishIngredients[i]);
-
- 		var row = document.createElement('tr');
- 		
- 		for(var c in currentDishIngredients[i]){
- 			var column = document.createElement('td');
- 			column.innerHTML = currentDishIngredients[i][c];
- 			row.appendChild(column);
- 		}
- 		recipeTable.appendChild(row);
- 	}
-
- 	var backButton = document.createElement('button');
-	backButton.type="button";
-	backButton.className = "btn btn-default btn-lg";
-	backButton.ariaLabel="Left Align"
-	console.log(backButton);
-	backButton.innerHTML = "Confirm Dish";
-
-
-		
-	panelBody.className = "panel-body";
-	panelBody.appendChild(recipeTable);
-	panelBody.appendChild(backButton);
-
-	recipePanel.appendChild(panelHeading);
-	recipePanel.appendChild(panelBody);
+	this.showView = function(){
+		container.show();
+	}
 	
 
-	this.rightSide.append(recipePanel);
+
+	this.createRecipePanel = function(){
+		var recipePanel = document.createElement('div');
+		recipePanel.className = "panel panel-default";
+
+	 	var panelBody = document.createElement('div');
+	 	var panelHeading = document.createElement('div');
+
+	 	panelHeading.className = "panel-heading";
+	 	panelHeading.id = "ingredientsHeader";
+	 	panelHeading.innerHTML = "INGREDIENTS FOR "+model.getNumberOfGuests()+" PEOPLE";
+
+	 	var tableDiv = document.createElement('div');
+	 	tableDiv.id = "tableDiv";
+
+	 	tableDiv.appendChild(self.createRecipeTable(model.getDish(model.getCurrentDish())));
+	 	
+
+	 	var confirmButton = document.createElement('button');
+		confirmButton.type="button";
+		confirmButton.className = "btn btn-default btn-lg";
+		confirmButton.ariaLabel="Left Align"
+		confirmButton.innerHTML = "Confirm Dish";
+		confirmButton.id = "confirmButton";
 
 
-	//LEFT SIDE
-	var dishTitleAndDescription = document.createElement('div');
-	dishTitleAndDescription.innerHTML = "<h2>"+dish.name+"</h2><br><img src='images/"+dish.image+"'</img><br>"+dish.description;
 
-	var backButton = document.createElement('button');
-	backButton.type="button";
-	backButton.className = "btn btn-default btn-lg";
-	backButton.ariaLabel="Left Align"
-	console.log(backButton);
-	backButton.innerHTML = "Go back";
-	var buttonSpan = document.createElement('span');
-	buttonSpan.className = 'glyphicon glyphicon-chevron-left';
-	backButton.appendChild(buttonSpan);
+		panelBody.className = "panel-body";
+		panelBody.appendChild(tableDiv);
+		panelBody.appendChild(confirmButton);
 
-	this.leftSide.append(dishTitleAndDescription);
-	this.leftSide.append(backButton);
+		recipePanel.appendChild(panelHeading);
+		recipePanel.appendChild(panelBody);
 
+		return recipePanel;
+	}
+
+	this.createRecipeTable = function(dish){
+	 	var recipeTable = document.createElement('table');
+	 	recipeTable.className = "table";
+	 	var currentDishIngredients = dish.ingredients;
+	 	for(var i = 0; i < currentDishIngredients.length; i++){
+
+	 		var row = document.createElement('tr');
+	 		
+	 		row.innerHTML = "<td>"+currentDishIngredients[i].name+"</td>\
+	 						   <td>"+currentDishIngredients[i].quantity*model.getNumberOfGuests()+"</td>\
+	 						   <td>"+currentDishIngredients[i].unit+"</td>\
+	 						   <td>"+currentDishIngredients[i].price*model.getNumberOfGuests()+" SEK</td>"
+
+	 	
+	 		recipeTable.appendChild(row);
+	 	}
+
+	 	return recipeTable;
+	}
+
+
+	this.setupRightSide = function(){
+		var recipePanel = self.createRecipePanel();
+		this.rightSide.append(recipePanel);
+		self.confirmButton = self.rightSide.find("#confirmButton");
+
+	}
+
+	this.setupLeftSide = function(){
+		var dishTitleAndDescription = self.createRecipeDescription(model.getDish(model.getCurrentDish()));
+
+		var backButton = document.createElement('button');
+		backButton.type="button";
+		backButton.className = "btn btn-default btn-lg";
+		backButton.ariaLabel="Left Align"
+		backButton.innerHTML = "Go back";
+		var buttonSpan = document.createElement('span');
+		buttonSpan.className = 'glyphicon glyphicon-chevron-left';
+		backButton.appendChild(buttonSpan);
+		backButton.id="backButton";
+
+		
+		this.leftSide.append(dishTitleAndDescription);
+		this.leftSide.append(backButton);
+		self.backButton = self.leftSide.find("#backButton");
+	}
+
+
+
+	this.createRecipeDescription = function(dish){
+		var dishTitleAndDescription = document.createElement('div');
+		dishTitleAndDescription.id = "dishTitleAndDescriptionDiv";
+		dishTitleAndDescription.innerHTML = "<h2>"+dish.name+"</h2><br><img src='images/"+dish.image+"'</img><br>"+dish.description;
+		return dishTitleAndDescription;
+	}
+	
+
+	
+	this.setupLeftSide();
+	this.setupRightSide();
 	
 	
 	

@@ -5,18 +5,23 @@ var DinnerModel = function() {
 	// and selected dinner options for dinner menu
 	var self = this;
 	this.numberOfGuests = 4;
-	this.selectedDishes = {
-		'starter':1,
-		'main dish':1,
-		'dessert':0
-	};
+	this.selectedDishes = []
+	//Id of currentyl selectedDish
+	this.currentDish = 1;
 
-	var notificationEnum = {
+	this.notificationEnum = {
 		newSearchResult: "newSearchResult",
-		numberOfGuestsChange: "numberOfGuestsChange"
+		numberOfGuestsChange: "numberOfGuestsChange",
+		currentDishChange: "currentDishChange",
+		selectedDishChange: "selectedDishChange"
 	}
 
 	this.observers = [];
+
+	this.setSelectedDish = function(type, id){
+		self.selectedDishes[type] = id;
+		notifyObservers(self.notificationEnum.selectedDishChange);
+	}
 
 	this.addObserver = function(obs){
 		self.observers.push(obs);
@@ -30,7 +35,15 @@ var DinnerModel = function() {
 
 	this.searchDish = "main dish";
 
+	this.getCurrentDish = function(){
+		return self.currentDish;
+	}
 
+	this.setCurrentDish = function(id){
+		
+		self.currentDish = id;
+		notifyObservers(self.notificationEnum.currentDishChange);
+	}
 
 	
 
@@ -40,12 +53,12 @@ var DinnerModel = function() {
 
 	this.setSearchDish = function(type){
 		self.searchDish = type;
-		notifyObservers(notificationEnum.newSearchResult);
+		notifyObservers(self.notificationEnum.newSearchResult);
 	}
 
 	this.setNumberOfGuests = function(num) {
 		self.numberOfGuests = num;
-		notifyObservers(notificationEnum.numberOfGuestsChange);
+		notifyObservers(self.notificationEnum.numberOfGuestsChange);
 		//TODO Lab 2
 	}
 

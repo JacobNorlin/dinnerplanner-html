@@ -42,19 +42,29 @@ var SideSummaryView = function(container , model){
 		mealTable.innerHTML = "<tr>\
 								<td><b>Name</b></td>\
 								<td><b>Price</b></td>\
-							</tr>";
+							  </tr>\
+							  <tr>\
+								<td><b></b></td>\
+								<td><b></b></td>\
+							  </tr>\
+							  <tr>\
+								<td><b></b></td>\
+								<td><b></b></td>\
+							  </tr>\
+							  <tr>\
+								<td><b></b></td>\
+								<td><b></b></td>\
+							  </tr>\
+							  ";
 		self.mealListView.append(mealTable);
-		for(dish in model.selectedDishes){
-			var dishId = model.selectedDishes[dish];
-			if(!(dishId == 0)){
-				var dish = model.getDish(dishId);
 
-				$("#mealTable").append("<tr><td>"+dish.name+"</td>\
-							    		<td>"+model.getDishPrice(dishId)+" SEK</td></tr>")
-				
-			}
-		}
 		
+	}
+
+	this.updateMealListView = function(dish){
+		self.mealListView.find("#mealTable").append("<tr><td>"+dish.name+"</td>\
+													 <td>"+model.getDishPrice(dish.id)+"SEK </td></tr>");
+		self.mealListView.find("#totalMealCost").html(model.getFullMenuCost())
 	}
 
 	this.createConfirmPurchaseView = function(){
@@ -73,8 +83,10 @@ var SideSummaryView = function(container , model){
 	this.update = function(obj){
 		if(obj == "numberOfGuestsChange"){
 			self.updatePeoplePlanner();
-			self.createMealListView();
+			//self.createMealListView();
 
+		}else if(obj == model.notificationEnum.selectedDishChange){
+			self.updateMealListView(model.getDish(model.getCurrentDish()));
 		}
 	}
 

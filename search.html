@@ -36,23 +36,33 @@
         <!--Right side-->
         <div class="col-xs-10 example-block alt" id="rightSide">
         	<!--Upper portion-->
-        	<div id="searchBarView">
-	        	<div class="row" id="searchBar">
-     			</div>
+        	<div id="searchView">
+	        	<div id="searchBarView">
+		        	<div class="row" id="searchBar">
+	     			</div>
 
-	        		
-        		<div class="row" id="dropDownMenu">
-        			
-        		</div>
+		        		
+	        		<div class="row" id="dropDownMenu">
+	        			
+	        		</div>
+	     		</div>
+
+	     		<!--Lower portion-->
+	     		<div class="row">
+	     			<div id="searchResultView">
+
+	     			</div>
+	     		</div>
      		</div>
 
-     		<!--Lower portion-->
-     		<div class="row">
-     			<div id="searchResultView">
-
-     			</div>
-     		</div>
-        </div>
+     		<div id="recipeView">
+ 				<div class="col-xs-5 example-block" id="recipeLeftSide">
+ 				</div>
+ 				<div class="col-xs-5 example-block alt" id="recipeRightSide">
+ 				</div>
+ 			</div>
+ 		</div>
+        
       </div>
       </div>
 
@@ -72,5 +82,7 @@
 	<script src="js/view/sideSummaryView.js"></script>
 	<script src="js/controller/sideSummaryController.js"></script>
 	<script src="js/controller/searchViewController.js"></script>
+	<script src="js/controller/searchResultViewController.js"></script>
+	<script src="js/controller/recipeViewController.js"></script>
   </body>
 </html>

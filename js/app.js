@@ -6,9 +6,9 @@ $(function() {
 	
 	//And create the needed controllers and views
 	//var exampleView = new ExampleView($("#exampleView"));
-	var searchView = new SearchView($("#searchBarView"));
-	var searchResultView = new SearchResultView($("#searchResultView"), model);
-	//var recipeView = new RecipeView($("#recipeView"), model);
+	var searchResultView = new SearchResultView($("#searchView"), model);
+	var recipeView = new RecipeView($("#recipeView"), model);
+	recipeView.hideView();
 	//var summaryView = new SummaryView($("#summaryView"), model);
 	//var fullMenuView = new FullMenuView($("#fullMenuView"), model);
 	var sideSummaryView = new SideSummaryView($("#sideSummaryView"), model)
@@ -16,6 +16,8 @@ $(function() {
 
 	//Create controllers
 	var sideSummaryController = new SideSummaryController(sideSummaryView, model);
-	var searchViewController = new SearchViewController(searchView, model);
+	var searchViewController = new SearchViewController(searchResultView, model);
+	var searchResultViewController = new SearchResultViewController(searchResultView, model);
+	var recipeViewController = new RecipeViewController(recipeView, model);
 
 });
