@@ -4,11 +4,11 @@ var DinnerModel = function() {
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
 
-	this.numberOfGuests = 1;
+	this.numberOfGuests = 4;
 	this.selectedDishes = {
 		'starter':1,
-		'main dish':1,
-		'dessert':1
+		'main dish':2,
+		'dessert':2
 	};
 
 	this.searchDish = "main dish";
@@ -85,6 +85,16 @@ var DinnerModel = function() {
 		}
 		return sum;
 		//TODO Lab 2
+	}
+
+	this.getDishPrice = function(id){
+		
+		var ingredients = self.getDish(id).ingredients;
+		var sum = 0;
+		for(ingredient in ingredients){
+			sum+=ingredients[ingredient].price*self.getNumberOfGuests()
+		}
+		return sum;
 	}
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu

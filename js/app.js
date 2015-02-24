@@ -10,5 +10,8 @@ $(function() {
 	var exampleView = new ExampleView($("#exampleView"));
 	var searchView = new SearchView($("#dropDownView"));
 	var searchResultView = new SearchResultView($("#searchResultView"), model);
+	var recipeView = new RecipeView($("#recipeView"), model);
+	var summaryView = new SummaryView($("#summaryView"), model);
+	var fullMenuView = new FullMenuView($("#fullMenuView"), model);
 
 });

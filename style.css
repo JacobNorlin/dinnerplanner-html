@@ -1,5 +1,13 @@
-#pageheader1{
+#homeletteHeader{
 	background:rgba(255,0,255,0.5);
+	padding:30px;
+	border-style: solid;
+}
+
+#summaryHeader{
+	background:rgba(0,255,255,0.5);
+	padding:10px;
+	border-style: solid;
 }
 
 #planningWindow{
@@ -43,4 +51,38 @@
 }
 .recipePanel {
 	padding:10px;
+}
+
+.recipeCard {
+	border-style: solid;
+	height:180px;
+	width:180px;
+}
+
+.recipeName {
+	border-style: solid;
+	background:rgb(255,255,255);
+	position:absolute; 
+	bottom:0;
+	width:180px;
+	left:15px;
+}
+
+.recipeImage img{
+	width:100%;
+	height:100%;
+}
+
+#fullMenuView{
+	padding: 50px;
+	background:white;
+}
+
+.priceDiv {
+	font-size:14pt;
+
+}
+
+.totalPriceDiv{
+	border-left:1px solid;
 }
