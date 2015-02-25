@@ -8,6 +8,7 @@ $(function() {
 	//var exampleView = new ExampleView($("#exampleView"));
 	var searchResultView = new SearchResultView($("#searchView"), model);
 	var recipeView = new RecipeView($("#recipeView"), model);
+	//var overviewView = new OverviewView($("overviewView"), model);
 	recipeView.hideView();
 	//var summaryView = new SummaryView($("#summaryView"), model);
 	//var fullMenuView = new FullMenuView($("#fullMenuView"), model);

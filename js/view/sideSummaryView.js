@@ -90,6 +90,8 @@ var SideSummaryView = function(container , model){
 	this.createMealListView();
 	this.createConfirmPurchaseView();
 
+	
+
 
 
 }

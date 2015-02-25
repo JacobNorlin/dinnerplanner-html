@@ -13,4 +13,13 @@ var SideSummaryController = function(view, model){
 
 	});
 
+	view.confirmPurchaseView.find("#confirmPurchase").click(function(){
+		if(model.getTotalMenuPrice() == 0){
+			return;
+		}
+		$("#fullSearchView").hide();
+		var asdf = new SummaryView($("#summaryView"), model);
+		new SummaryViewController(asdf, model);
+	})
+
 }

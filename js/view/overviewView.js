@@ -2,9 +2,8 @@
 var SummaryView = function (container, model) {
 	
 	//Container is #summaryView
-	var summaryHeader = container.find("#summaryViewHeader");
+	var summaryHeader = container.find("#summaryHeader");
 	var overviewView = container.find("#overviewView");
-	var printRecipeView = container.find("#printRecipeView");
 
 	var dishIds = model.getFullMenu();
 
@@ -54,44 +53,27 @@ var SummaryView = function (container, model) {
 		totalPriceCol.innerHTML = model.getTotalMenuPrice()+" SEK";
 		row2.appendChild(totalPriceCol);
 
-		var buttonDiv = self.createButton("btn btn-default btn-lg", "printRecipeButton", "Print full recipe");
-
-		
+		var buttonDiv = self.createPrintButton();
 
 		overviewView.append(row);
 		overviewView.append(row2);
 		overviewView.append(buttonDiv);
 
-
-
 		console.debug(row)
 
 	}
-	this.setupHeader = function(){
-		var backButton = self.createButton("btn btn-default btn-lg", "backToSearchViewButton", "Edit recipe")
-		console.debug(backButton)
-		
-		summaryHeader.append("<h2>My dinner for: "+model.getNumberOfGuests()+"</h2>");
-		summaryHeader.append(backButton);
-	}
 
-	this.setup = function(){
-		self.setupHeader();
-		self.setupOverview();
-		self.printRecipeButton = $("#printRecipeButton");
-		self.backButton = $("#backToSearchViewButton");
-	}
-
-	this.createButton = function(className, id, label){
+	this.createPrintButton = function(){
 		var buttonDiv = document.createElement('div');
-		var button = document.createElement('button');
-		button.type="button";
-		button.className = className;
-		button.ariaLabel="Left Align"
-		button.innerHTML = label;
-		button.id = id;
+		buttonDiv.class ="col-xs-4 col-push-4 ";
+		var backButton = document.createElement('button');
+		backButton.type="button";
+		backButton.className = "btn btn-default btn-lg";
+		backButton.ariaLabel="Left Align"
+		console.log(backButton);
+		backButton.innerHTML = "Print full recipe";
 
-		buttonDiv.appendChild(button);
+		buttonDiv.appendChild(backButton);
 		return buttonDiv;
 	}
 
@@ -125,21 +107,14 @@ var SummaryView = function (container, model) {
 		container.show();
 	}
 
-	this.hideOverviewView = function(){
-		overviewView.html("");
+
+	this.setupHeader = function(){
+		summaryHeader.html("My dinner for: "+model.getNumberOfGuests());
 	}
-
-	this.killView = function(){
-		summaryHeader.html("");
-		overviewView.html("");
-		printRecipeView.html("");
-
-	}
-
-
 	
 
-	this.setup();
+	this.setupOverview();
+	this.setupHeader();
 	
 	
 }

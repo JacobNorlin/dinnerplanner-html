@@ -14,11 +14,11 @@
   <body class="full">
 
 
-	  	<div class="jumbotron" id="pageheader1">
-		   <h1>Homelette
-		      <small>From the best cucks in the world, directly in to your kitchen</small>
-		</div>
-	<div class="container-fluid">
+  	<div class="jumbotron" id="pageheader1">
+	   <h1>Homelette
+	      <small>From the best cucks in the world, directly in to your kitchen</small>
+	</div>
+	<div class="container-fluid" id="fullSearchView">
 	  <div class="row">
     	<div class="col-xs-2 example-block" id="sideSummaryView">
         	<div class="row" id="peoplePlannerView">
@@ -37,19 +37,19 @@
         <div class="col-xs-10 example-block alt" id="rightSide">
         	<!--Upper portion-->
         	<div id="searchView">
-	        	<div id="searchBarView">
-		        	<div class="row" id="searchBar">
+	        	<div id="searchBarView" class="col-xs-12">
+		        	<div class="row insideSearchBar" id="searchBar">
 	     			</div>
 
 		        		
-	        		<div class="row" id="dropDownMenu">
+	        		<div class="row insideSearchBar" id="dropDownMenu">
 	        			
 	        		</div>
 	     		</div>
 
 	     		<!--Lower portion-->
 	     		<div class="row">
-	     			<div id="searchResultView">
+	     			<div class="col-xs-12" id="searchResultView">
 
 	     			</div>
 	     		</div>
@@ -64,7 +64,20 @@
  		</div>
         
       </div>
-      </div>
+     </div>
+
+	<div class="container-fluid" id="summaryView">
+      	<div id="summaryViewHeader">
+      	</div>
+
+      	<div id="overviewView">
+      	</div>
+
+      	<div id="printRecipeView">
+      	</div>
+  	</div>
+
+
 
 
     <!-- jQuery -->
@@ -80,9 +93,12 @@
 	<script src="js/view/searchResultView.js"></script>
 	<script src="js/view/recipeView.js"></script>
 	<script src="js/view/sideSummaryView.js"></script>
+	<script src="js/view/summaryView.js"></script>
+	<script src="js/view/fullRecipeView.js"></script>
 	<script src="js/controller/sideSummaryController.js"></script>
 	<script src="js/controller/searchViewController.js"></script>
 	<script src="js/controller/searchResultViewController.js"></script>
 	<script src="js/controller/recipeViewController.js"></script>
+	<script src="js/controller/summaryViewController.js"></script>
   </body>
 </html>

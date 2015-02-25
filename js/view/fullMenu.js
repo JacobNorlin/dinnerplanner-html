@@ -1,5 +1,5 @@
 //ExampleView Object constructor
-var FullMenuView = function (container, model) {
+var OverviewView = function (container, model) {
 	
 	//Container is #summaryView
 
