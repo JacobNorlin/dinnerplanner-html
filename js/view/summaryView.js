@@ -54,7 +54,7 @@ var SummaryView = function (container, model) {
 		totalPriceCol.innerHTML = model.getTotalMenuPrice()+" SEK";
 		row2.appendChild(totalPriceCol);
 
-		var buttonDiv = self.createButton("btn btn-default btn-lg", "printRecipeButton", "Print full recipe");
+		var buttonDiv = self.createButton("btn btn-default btn-lg col-xs-12", "printRecipeButton", "Print full recipe");
 
 		
 
@@ -71,7 +71,7 @@ var SummaryView = function (container, model) {
 		var backButton = self.createButton("btn btn-default btn-lg", "backToSearchViewButton", "Edit recipe")
 		console.debug(backButton)
 		
-		summaryHeader.append("<h2>My dinner for: "+model.getNumberOfGuests()+"</h2>");
+		summaryHeader.append("<div class='col-xs-10'> <h2>My dinner for: "+model.getNumberOfGuests()+"</h2></div>");
 		summaryHeader.append(backButton);
 	}
 

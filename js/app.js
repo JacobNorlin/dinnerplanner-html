@@ -1,17 +1,18 @@
+var app = {};
+
 $(function() {
 	//We instantiate our model
 	var model = new DinnerModel();
 
 	console.debug("Loading site...");
-	
-	//And create the needed controllers and views
-	//var exampleView = new ExampleView($("#exampleView"));
+
+	app.HTMLHelper = new HTMLHelper(model)
+
 	var searchResultView = new SearchResultView($("#searchView"), model);
-	var recipeView = new RecipeView($("#recipeView"), model);
-	//var overviewView = new OverviewView($("overviewView"), model);
+	var recipeView = new RecipeView($("#recipeView"), model );
+
 	recipeView.hideView();
-	//var summaryView = new SummaryView($("#summaryView"), model);
-	//var fullMenuView = new FullMenuView($("#fullMenuView"), model);
+
 	var sideSummaryView = new SideSummaryView($("#sideSummaryView"), model)
 
 
@@ -23,4 +24,7 @@ $(function() {
 
 	$("#summaryView").hide();
 
+
+
 });
+

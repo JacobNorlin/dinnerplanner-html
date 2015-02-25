@@ -14,40 +14,41 @@ var FullRecipeView = function (container, model) {
 		var dish = model.getDish(dishIds[dishId]);
 
 		var row = document.createElement('div');
-		row.className = "row";
+		row.className = "row recipeRow";
 
-		var paddingCol = document.createElement('div');
-		paddingCol.className = "col-xs-1";
+
 
 		var picCol =  document.createElement('div');
-		picCol.className = "col-xs-1";
+		picCol.className = "col-xs-2";
 
-		var descCol =  document.createElement('div');
-		descCol.className = "col-xs-4";
+		var ingrdCol =  document.createElement('div');
+		ingrdCol.className = "col-xs-5";
 
 		var prepCol =  document.createElement('div');
-		prepCol.className = "col-xs-4";
+		prepCol.className = "col-xs-5";
 
 		var dishImg =  document.createElement('img');
 		dishImg.src = "images/"+dish.image;
 
 		
 
-		var descDiv = document.createElement('div');
-		descDiv.id = "descDiv";
-		descDiv.innerHTML = "<h2>"+dish.name+"</h2><br>"+dish.description;
+		var ingrdDiv = document.createElement('div');
+		ingrdDiv.id = "ingrdDiv";
+		var ingredients = app.HTMLHelper.createRecipeTable(dish);
+		ingrdDiv.innerHTML = "<h2>"+dish.name+"</h2><br>";
+		ingrdDiv.appendChild(ingredients);
 
 		var prepDiv = document.createElement('div');
 		prepDiv.id = "prepDiv";
 		prepDiv.innerHTML = "<h2>Preparation</h2><br>"+dish.description;
 
-		descCol.appendChild(descDiv);
+		ingrdCol.appendChild(ingrdDiv);
 		prepCol.appendChild(prepDiv);
 		picCol.appendChild(dishImg);
 
-		row.appendChild(paddingCol);
+
 		row.appendChild(picCol);
-		row.appendChild(descCol);
+		row.appendChild(ingrdCol);
 		row.appendChild(prepCol);
 
 		container.append(row);

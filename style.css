@@ -131,8 +131,24 @@ body{
 
 #summaryViewHeader{
 	border-bottom: 3px solid;
+	padding:15px;
 }
 
 #summaryView{
+	padding:30px;
 	
+}
+
+#overviewView{
+	padding:20px;
+}
+
+#printRecipeView{
+	top:30px;
+}
+
+.recipeRow{
+	padding:20px;
+	border-bottom:3px solid;
+	background: #cfdddf;
 }

@@ -4,14 +4,14 @@ var SummaryViewController = function(view, model){
 
 	view.printRecipeButton.click(function(){
 		view.hideOverviewView();
-		new FullRecipeView($("#printRecipeView"), model);
+		new FullRecipeView($("#printRecipeView"), model, model);
 		
 	})
 
 	view.backButton.click(function(){
 		$("#fullSearchView").show();
 		view.killView();
-		
+
 	})
 
 }
