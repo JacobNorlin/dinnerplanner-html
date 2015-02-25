@@ -12,16 +12,17 @@ var SideSummaryView = function(container , model){
 
 	this.createPeoplePlanner = function(){
 
-		var html = $("<h2>My Dinner</h2>\
-					<div id='numberofGuestsView'>\
-						<div>\
-							Number of guests: "+model.getNumberOfGuests()+"\
+		var html = $("<div class='col-xs-12'>\
+						<h2>My Dinner</h2>\
+						<div id='numberofGuestsView'>\
+							<div>\
+								Number of guests: "+model.getNumberOfGuests()+"\
+							</div>\
 						</div>\
-					</div>\
-					<div>\
-						<button id='minusGuest' class='btn'><span class='glyphicon glyphicon-minus'></span></button>\
-						<button id='plusGuest' class='btn'><span class='glyphicon glyphicon-plus'></span></button>\
-					</div>\ ");
+						<div>\
+							<button id='minusGuest' class='btn'><span class='glyphicon glyphicon-minus'></span></button>\
+							<button id='plusGuest' class='btn'><span class='glyphicon glyphicon-plus'></span></button>\
+						</div>					 </div>");
 
 		self.peoplePlannerView.html(html);
 
@@ -64,7 +65,7 @@ var SideSummaryView = function(container , model){
 	}
 
 	this.createConfirmPurchaseView = function(){
-		var html = $("<div id='confirmPurchaseView'>\
+		var html = $("<div class='col-xs-12' id='confirmPurchaseView'>\
 						<div>\
 							<h2>Total: <span id='totalMealCost'></span>\
 						</div>\
@@ -90,7 +91,7 @@ var SideSummaryView = function(container , model){
 	this.createMealListView();
 	this.createConfirmPurchaseView();
 
-	
+
 
 
 

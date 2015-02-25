@@ -21,4 +21,6 @@ $(function() {
 	var searchResultViewController = new SearchResultViewController(searchResultView, model);
 	var recipeViewController = new RecipeViewController(recipeView, model);
 
+	$("#summaryView").hide();
+
 });

@@ -19,6 +19,7 @@ var SideSummaryController = function(view, model){
 		}
 		$("#fullSearchView").hide();
 		var asdf = new SummaryView($("#summaryView"), model);
+		$("#summaryView").show();
 		new SummaryViewController(asdf, model);
 	})
 
