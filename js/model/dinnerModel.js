@@ -40,7 +40,7 @@ var DinnerModel = function() {
 	}
 
 	this.setFilterText = function(val){
-		self.filterText = val;
+		self.filterText = val.toLowerCase();
 		notifyObservers(self.notificationEnum.filterTextChange);
 	}
 
@@ -172,11 +172,11 @@ var DinnerModel = function() {
 		if(filter){
 			found = false;
 			$.each(dish.ingredients,function(index,ingredient) {
-				if(ingredient.name.indexOf(filter)!=-1) {
+				if(ingredient.name.toLowerCase().indexOf(filter)!=-1) {
 					found = true;
 				}
 			});
-			if(dish.name.indexOf(filter) != -1)
+			if(dish.name.toLowerCase().indexOf(filter) != -1)
 			{
 				found = true;
 			}
