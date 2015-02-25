@@ -19,8 +19,12 @@ var SearchResultView = function (container, model) {
 	this.update = function(obj){
 		if(obj == "newSearchResult"){
 			self.clearSearchResults()
-			self.createSearchResult(model.getSearchDish());
+			self.createSearchResult(model.getSearchDish(), "");
 
+		}else if(obj == model.notificationEnum.filterTextChange){
+			self.clearSearchResults();
+			self.createSearchResult(model.getSearchDish(), model.getFilterText());
+			console.debug(model.getFilterText())
 		}
 	}
 
@@ -28,13 +32,10 @@ var SearchResultView = function (container, model) {
 		container.hide();
 	}
 
-	this.showView = function(){
-		container.show();
-	}
 	
 
-	this.createSearchResult = function(searchDish){
-		this.allDishes = model.getAllDishes(searchDish);
+	this.createSearchResult = function(searchDish, filterText){
+		this.allDishes = model.getAllDishes(searchDish, filterText);
 		for(var i = 0; i < this.allDishes.length; i++){
 			var recipeCard = self.createRecipeCard(self.allDishes[i]);
 			var column = document.createElement('div');
@@ -117,6 +118,7 @@ var SearchResultView = function (container, model) {
 
 	this.createSearchBar();
 	this.createDropDownMenu();
+	this.createSearchResult(model.getSearchDish())
 	
 }
  

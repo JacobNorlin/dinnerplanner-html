@@ -17,6 +17,7 @@ var SearchView = function (container, model) {
 					</div>");
 
 		self.searchBar.html(html);
+		self.searchBarInput = $("searchBarInput");
 
 		self.searchBarInput = self.searchBar.find("#searchBarInput");
 	}

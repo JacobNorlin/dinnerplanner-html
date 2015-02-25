@@ -12,7 +12,12 @@ var SearchViewController = function(view, model){
 	})
 
 	view.dessertButton.click(function(){
+		
 		model.setSearchDish("dessert");
+	})
+
+	view.searchBarInput.keyup(function(){
+		model.setFilterText(view.searchBarInput.val());
 	})
 
 }

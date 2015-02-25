@@ -12,12 +12,14 @@ var DinnerModel = function() {
 	};
 	//Id of currentyl selectedDish
 	this.currentDish = 1;
+	this.filterText ="";
 
 	this.notificationEnum = {
 		newSearchResult: "newSearchResult",
 		numberOfGuestsChange: "numberOfGuestsChange",
 		currentDishChange: "currentDishChange",
-		selectedDishChange: "selectedDishChange"
+		selectedDishChange: "selectedDishChange",
+		filterTextChange: "filterTextChange"
 	}
 
 	this.observers = [];
@@ -37,7 +39,17 @@ var DinnerModel = function() {
 		 })
 	}
 
-	this.searchDish = "main dish";
+	this.setFilterText = function(val){
+		self.filterText = val;
+		notifyObservers(self.notificationEnum.filterTextChange);
+	}
+
+	this.getFilterText = function(val){
+		return self.filterText;
+	}
+
+
+	this.searchDish = "all";
 
 	this.getCurrentDish = function(){
 		return self.currentDish;
@@ -169,7 +181,12 @@ var DinnerModel = function() {
 				found = true;
 			}
 		}
-	  	return dish.type == type && found;
+		if(type == "all"){
+			return dish && found;
+		}else{
+			return dish.type == type && found;	
+		}
+	  	
 	  });	
 	}
 
