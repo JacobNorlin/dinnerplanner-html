@@ -13,5 +13,12 @@ var SearchResultViewController = function(view, model){
 		view.hideView();
 		//newView.show();
 	}
+
+	$(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+       model.scrolls++;
+       model.getAllDishesJson();
+   }
+});
 	
 }

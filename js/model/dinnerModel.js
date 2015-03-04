@@ -10,6 +10,8 @@ var DinnerModel = function() {
 	//Id of currentyl selectedDish
 	this.currentDish;
 	this.filterText ="";
+	this.rpp = 15;
+	this.scrolls = 1;
 
 	this.notificationEnum = {
 		newSearchResult: "newSearchResult",
@@ -39,6 +41,7 @@ var DinnerModel = function() {
 	}
 
 	this.setFilterText = function(val){
+		self.scrolls = 1;
 		self.filterText = val.toLowerCase();
 		notifyObservers(self.notificationEnum.filterTextChange);
 	}
@@ -176,7 +179,7 @@ var DinnerModel = function() {
 
 	this.getAllDishesJson = function() {
 		var apiKey = "dvxzUl57TpT2oAV9h288wTuTCEEQE8z8";
-		var url = "http://api.bigoven.com/recipes?pg=1&rpp=25&any_kw="
+		var url = "http://api.bigoven.com/recipes?pg=1&rpp="+self.rpp*self.scrolls+"&any_kw="
 		+self.getFilterText() + " " +self.getSearchDish()
 		+"&api_key=" + apiKey;
 

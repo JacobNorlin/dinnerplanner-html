@@ -22,6 +22,7 @@ var FullRecipeView = function (container, model) {
 		prepCol.className = "col-xs-5";
 
 		var dishImg =  document.createElement('img');
+		dishImg.className = "img-responsive center-block"
 		dishImg.src = dish.HeroPhotoUrl;
 
 		

@@ -155,5 +155,7 @@ body{
 
 #loadingImage{
 	position:absolute;
-	align:middle;
+	vertical-align:middle;
+	height:100px;
+	width:100px;
 }
