@@ -11,7 +11,7 @@ var SearchResultViewController = function(view, model){
 
 	var switchView = function(newView){
 		view.hideView();
-		newView.show();
+		//newView.show();
 	}
 	
 }

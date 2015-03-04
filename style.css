@@ -152,3 +152,8 @@ body{
 	border-bottom:3px solid;
 	background: #cfdddf;
 }
+
+#loadingImage{
+	position:absolute;
+	align:middle;
+}

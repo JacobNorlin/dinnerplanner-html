@@ -180,6 +180,8 @@ var DinnerModel = function() {
 		+self.getFilterText() + " " +self.getSearchDish()
 		+"&api_key=" + apiKey;
 
+		$("#loadingImage").show();
+
 		$.ajax({
 		         type: "GET",
 		         dataType: 'json',
@@ -187,6 +189,7 @@ var DinnerModel = function() {
 		         url: url,
 		         success: function (data) {
 		         	self.searchResult = data;
+		         	$("#loadingImage").hide();
 		            notifyObservers(self.notificationEnum.searchResultUpdate, data);
 		        	}
          });
@@ -195,7 +198,7 @@ var DinnerModel = function() {
     this.getDish = function(id){
     	var apiKey = "dvxzUl57TpT2oAV9h288wTuTCEEQE8z8";
 		var url = "http://api.bigoven.com/recipe/" + id + "?api_key="+apiKey;
-
+		$("#loadingImage").show();
 		$.ajax({
 		         type: "GET",
 		         dataType: 'json',
@@ -207,6 +210,7 @@ var DinnerModel = function() {
 		         	//Set dish prices
 		         	$.each(data.Ingredients, function(index, value){
 		         		value.Price = Math.floor((Math.random() * 100) + 1);
+		         		$("#loadingImage").hide();
 		         	})
 
 		         	self.setCurrentDish(data);

@@ -12,8 +12,11 @@ var SearchView = function (container, model) {
 
 	this.createSearchBar = function(){
 		var html = $("<h2>SELECT DISH:</h2>\
-					<div>\
-          				<input type='text' class='input-medium search-query' name='s' placeholder='Search' value='' id='searchBarInput'>\
+					<div class='input-group'>\
+					    <input type='text' class='form-control id='searchBarInput'/>\
+					    <span class='input-group-addon'>\
+					        <i class='fa fa-search'></i>\
+					    </span>\
 					</div>");
 
 		self.searchBar.html(html);

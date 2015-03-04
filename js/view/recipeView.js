@@ -12,6 +12,7 @@ var RecipeView = function (container, model) {
 
 	this.update = function(obj, data){
 		if(obj == model.notificationEnum.individualRecipeUpdate){
+			self.showView();
 			console.debug(data)
 			self.leftSide.find("#dishTitleAndDescriptionDiv").html(self.createRecipeDescription(data));
 			self.rightSide.find("#tableDiv").html(app.HTMLHelper.createRecipeTable(data));
