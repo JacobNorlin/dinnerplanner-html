@@ -16,15 +16,19 @@ var SearchResultView = function (container, model) {
 
 	this.currentRecipeCards = [];
 
-	this.update = function(obj){
+	this.update = function(obj, data){
 		if(obj == "newSearchResult"){
 			self.clearSearchResults()
-			self.createSearchResult(model.getSearchDish(), "");
+			self.doSearch("");
 
 		}else if(obj == model.notificationEnum.filterTextChange){
 			self.clearSearchResults();
-			self.createSearchResult(model.getSearchDish(), model.getFilterText());
+			self.doSearch(model.getFilterText());
 			console.debug(model.getFilterText())
+		}else if(obj == model.notificationEnum.searchResultUpdate){
+			console.debug(data)
+			self.createAllRecipeCards(data.Results);
+
 		}
 	}
 
@@ -32,20 +36,22 @@ var SearchResultView = function (container, model) {
 		container.hide();
 	}
 
-	
+	this.doSearch = function(filterText){
+		model.getAllDishesJson(filterText);
+	}
 
-	this.createSearchResult = function(searchDish, filterText){
-		this.allDishes = model.getAllDishes(searchDish, filterText);
-		for(var i = 0; i < this.allDishes.length; i++){
-			var recipeCard = self.createRecipeCard(self.allDishes[i]);
+	this.createAllRecipeCards = function(searchResults){
+		for(var i = 0; i < searchResults.length; i++){
+			var recipeCard = self.createRecipeCard(searchResults[i]);
 			var column = document.createElement('div');
 			column.className ="col-xs-2";
 			column.appendChild(recipeCard);
 			self.searchResultView.append(column);
-			console.debug(recipeCard);
 
 		}
 	}
+	
+
 
 	this.clearSearchResults = function(){
 		self.searchResultView.html("");
@@ -55,10 +61,11 @@ var SearchResultView = function (container, model) {
 	this.createRecipeCard = function(dish){
 
 		var dishImage = document.createElement('img');
-		dishImage.src = "images/"+dish.image;
-		dishImage.setAttribute("dishId", dish.id);
+		dishImage.src = dish.HeroPhotoUrl;
+		dishImage.setAttribute("dishId", dish.RecipeID);
+		dishImage.className = "img-responsive center-block";
 		var dishTitleAndDescription = document.createElement('div');
-		dishTitleAndDescription.innerHTML = "<b>"+dish.name+"</b><br>"+dish.description;
+		dishTitleAndDescription.innerHTML = "<b>"+dish.Title+"</b><br>"+dish.description;
 
 		
 
@@ -118,7 +125,7 @@ var SearchResultView = function (container, model) {
 
 	this.createSearchBar();
 	this.createDropDownMenu();
-	this.createSearchResult(model.getSearchDish())
+	this.doSearch(model.getSearchDish())
 	
 }
  

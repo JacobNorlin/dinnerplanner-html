@@ -6,7 +6,7 @@ var SummaryView = function (container, model) {
 	var overviewView = container.find("#overviewView");
 	var printRecipeView = container.find("#printRecipeView");
 
-	var dishIds = model.getFullMenu();
+	var dishes = model.getFullMenu();
 
 	//row.appendChild(paddingCol);
 	//row2.appendChild(paddingCol);
@@ -27,12 +27,8 @@ var SummaryView = function (container, model) {
 		var paddingCol = document.createElement('div');
 		paddingCol.className = "col-xs-3";
 
-		for(var dishId in dishIds){
 
-			if(dishIds[dishId] == 0){
-				continue;
-			}
-			var dish = model.getDish(dishIds[dishId]);
+		$.each(dishes, function(index, dish){
 
 			recipeCard = self.createRecipeCard(dish);
 			
@@ -43,11 +39,12 @@ var SummaryView = function (container, model) {
 			//PRICE
 			var priceCol =  document.createElement('div');
 			priceCol.className = "col-xs-2 priceDiv";
-			priceCol.innerHTML = model.getDishPrice(dish.id)+" SEK";
+			priceCol.innerHTML = model.getDishPrice(dish)+" SEK";
 
 			row.appendChild(panelCol);
 			row2.appendChild(priceCol);
-		}
+		})
+
 
 		var totalPriceCol = document.createElement('div');
 		totalPriceCol.className = "col-xs-2 priceDiv totalPriceDiv";
@@ -98,7 +95,7 @@ var SummaryView = function (container, model) {
 	this.createRecipeCard = function(dish){
 
 		var dishImg =  document.createElement('img');
-		dishImg.src = "images/"+dish.image;
+		dishImg.src = dish.HeroPhotoUrl;
 		dishImg.className="img-responsive center-block";
 
 		var recipeCard = document.createElement('div');
@@ -110,7 +107,7 @@ var SummaryView = function (container, model) {
 		recipeName.className = "recipeName";
 
 		recipeImage.appendChild(dishImg);
-		recipeName.innerHTML = dish.name;
+		recipeName.innerHTML = dish.Title;
 
 		recipeCard.appendChild(recipeImage);
 		recipeCard.appendChild(recipeName);

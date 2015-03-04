@@ -10,15 +10,16 @@ var RecipeView = function (container, model) {
 
 	model.addObserver(this);
 
-	this.update = function(obj){
-		if(obj == model.notificationEnum.numberOfGuestsChange){
-			self.rightSide.find("#ingredientsHeader").html("INGREDIENTS FOR "+model.getNumberOfGuests()+" PEOPLE");
-			self.rightSide.find("#tableDiv").html(app.HTMLHelper.createRecipeTable(model.getDish(model.getCurrentDish())));
+	this.update = function(obj, data){
+		if(obj == model.notificationEnum.individualRecipeUpdate){
+			console.debug(data)
+			self.leftSide.find("#dishTitleAndDescriptionDiv").html(self.createRecipeDescription(data));
+			self.rightSide.find("#tableDiv").html(app.HTMLHelper.createRecipeTable(data));
 		}else if(obj == model.notificationEnum.currentDishChange){
-
-			
-			self.leftSide.find("#dishTitleAndDescriptionDiv").html(self.createRecipeDescription(model.getDish(model.getCurrentDish())));
-			self.rightSide.find("#tableDiv").html(app.HTMLHelper.createRecipeTable(model.getDish(model.getCurrentDish())));
+			model.getDish(model.getCurrentDish());
+		}else if(obj == model.notificationEnum.numberOfGuestsChange){
+			self.rightSide.find("#ingredientsHeader").html("INGREDIENTS FOR "+model.getNumberOfGuests()+" PEOPLE");
+			self.rightSide.find("#tableDiv").html(app.HTMLHelper.createRecipeTable(model.getCurrentDish()));
 		}
 	}
 
@@ -46,7 +47,7 @@ var RecipeView = function (container, model) {
 	 	var tableDiv = document.createElement('div');
 	 	tableDiv.id = "tableDiv";
 
-	 	tableDiv.appendChild(app.HTMLHelper.createRecipeTable(model.getDish(model.getCurrentDish())));
+	 	//tableDiv.appendChild(app.HTMLHelper.createRecipeTable(model.getDish(model.getCurrentDish())));
 	 	
 
 	 	var confirmButton = document.createElement('button');
@@ -79,7 +80,7 @@ var RecipeView = function (container, model) {
 	}
 
 	this.setupLeftSide = function(){
-		var dishTitleAndDescription = self.createRecipeDescription(model.getDish(model.getCurrentDish()));
+		var dishTitleAndDescription = self.createRecipeDescription({Title:"lol",HeroPhotoUrl:"lol", Description:"Lol"});
 
 		var backButton = document.createElement('button');
 		backButton.type="button";
@@ -102,7 +103,16 @@ var RecipeView = function (container, model) {
 	this.createRecipeDescription = function(dish){
 		var dishTitleAndDescription = document.createElement('div');
 		dishTitleAndDescription.id = "dishTitleAndDescriptionDiv";
-		dishTitleAndDescription.innerHTML = "<h2>"+dish.name+"</h2><br><img src='images/"+dish.image+"'</img><br>"+dish.description;
+		dishTitleAndDescription.innerHTML = "<h2>"+dish.Title+"</h2><small>"+dish.Category+"</small>";
+		var dishImage = document.createElement('img');
+		dishImage.src = dish.HeroPhotoUrl;
+		dishImage.className = "img-responsive center-block";
+		
+		var description = document.createElement('div');
+		description.innerHTML = dish.Description;
+
+		dishTitleAndDescription.appendChild(dishImage);
+		dishTitleAndDescription.appendChild(description);
 		return dishTitleAndDescription;
 	}
 	

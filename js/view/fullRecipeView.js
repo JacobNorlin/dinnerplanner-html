@@ -3,15 +3,9 @@ var FullRecipeView = function (container, model) {
 	
 
 
-	var dishIds = model.getFullMenu();
+	var dishes = model.getFullMenu();
 
-	for(var dishId in dishIds){
-
-		if(dishIds[dishId] == 0){
-			continue;
-		}
-
-		var dish = model.getDish(dishIds[dishId]);
+	$.each(dishes, function(index, dish){
 
 		var row = document.createElement('div');
 		row.className = "row recipeRow";
@@ -28,19 +22,19 @@ var FullRecipeView = function (container, model) {
 		prepCol.className = "col-xs-5";
 
 		var dishImg =  document.createElement('img');
-		dishImg.src = "images/"+dish.image;
+		dishImg.src = dish.HeroPhotoUrl;
 
 		
 
 		var ingrdDiv = document.createElement('div');
 		ingrdDiv.id = "ingrdDiv";
 		var ingredients = app.HTMLHelper.createRecipeTable(dish);
-		ingrdDiv.innerHTML = "<h2>"+dish.name+"</h2><br>";
+		ingrdDiv.innerHTML = "<h2>"+dish.Title+"</h2><br>";
 		ingrdDiv.appendChild(ingredients);
 
 		var prepDiv = document.createElement('div');
 		prepDiv.id = "prepDiv";
-		prepDiv.innerHTML = "<h2>Preparation</h2><br>"+dish.description;
+		prepDiv.innerHTML = "<h2>Preparation</h2><br>"+dish.Instructions;
 
 		ingrdCol.appendChild(ingrdDiv);
 		prepCol.appendChild(prepDiv);
@@ -52,7 +46,8 @@ var FullRecipeView = function (container, model) {
 		row.appendChild(prepCol);
 
 		container.append(row);
-	}
+	})
+
 
 
 

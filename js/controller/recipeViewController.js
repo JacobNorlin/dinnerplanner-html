@@ -7,7 +7,7 @@ var RecipeViewController = function(view, model){
 	})
 
 	view.confirmButton.click(function(){
-		model.setSelectedDish(model.getDish(model.getCurrentDish()).type, model.getCurrentDish());
+		model.setSelectedDish(model.getCurrentDish().Category, model.getCurrentDish());
 		console.debug(model.selectedDishes);
 	})
 

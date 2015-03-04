@@ -8,7 +8,7 @@ var SearchViewController = function(view, model){
 	})
 
 	view.mainButton.click(function(){
-		model.setSearchDish("main dish");
+		model.setSearchDish("Main Course");
 	})
 
 	view.dessertButton.click(function(){
@@ -17,7 +17,19 @@ var SearchViewController = function(view, model){
 	})
 
 	view.searchBarInput.keyup(function(){
-		model.setFilterText(view.searchBarInput.val());
+		typewatch(function(){
+			model.setFilterText(view.searchBarInput.val());
+		}, 500)
+		
 	})
+
+	//Stolen from stackoverflow, makes it so it only sends event 500ms after typing stops, prevents assload of GETs
+	var typewatch = (function(){
+	  var timer = 0;
+	  return function(callback, ms){
+	    clearTimeout (timer);
+	    timer = setTimeout(callback, ms);
+	  };
+	})();
 
 }
