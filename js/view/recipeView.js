@@ -21,6 +21,11 @@ var RecipeView = function (container, model) {
 		}else if(obj == model.notificationEnum.numberOfGuestsChange){
 			self.rightSide.find("#ingredientsHeader").html("INGREDIENTS FOR "+model.getNumberOfGuests()+" PEOPLE");
 			self.rightSide.find("#tableDiv").html(app.HTMLHelper.createRecipeTable(model.getCurrentDish()));
+		}else if(obj == model.notificationEnum.recipeLoadingError){
+			self.showView();
+			console.debug("actually called")
+			self.leftSide.find("#dishTitleAndDescriptionDiv").html(self.createErrorPage());
+			self.rightSide.find("#tableDiv").html("");
 		}
 	}
 
@@ -114,6 +119,13 @@ var RecipeView = function (container, model) {
 
 		dishTitleAndDescription.appendChild(dishImage);
 		dishTitleAndDescription.appendChild(description);
+		return dishTitleAndDescription;
+	}
+
+	this.createErrorPage = function(dish){
+		var dishTitleAndDescription = document.createElement('div');
+		dishTitleAndDescription.id = "dishTitleAndDescriptionDiv";
+		dishTitleAndDescription.innerHTML = "<h2>Error getting data</h2>";
 		return dishTitleAndDescription;
 	}
 	

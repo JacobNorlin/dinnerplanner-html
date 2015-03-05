@@ -29,6 +29,9 @@ var SearchResultView = function (container, model) {
 			console.debug(data)
 			self.createAllRecipeCards(data.Results);
 
+		}else if(obj == model.notificationEnum.searchLoadingError){
+			self.clearSearchResults();
+			self.searchResultView.html("Error loading data, try again");
 		}
 	}
 

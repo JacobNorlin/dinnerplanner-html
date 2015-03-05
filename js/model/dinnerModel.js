@@ -20,7 +20,9 @@ var DinnerModel = function() {
 		selectedDishChange: "selectedDishChange",
 		filterTextChange: "filterTextChange",
 		searchResultUpdate: "searchResultUpdate",
-		individualRecipeUpdate: "individualRecipeUpdate"
+		individualRecipeUpdate: "individualRecipeUpdate",
+		recipeLoadingError: "recipeLoadingError",
+		searchLoadingError: "searchLoadingError"
 	}
 
 	this.observers = [];
@@ -194,7 +196,10 @@ var DinnerModel = function() {
 		         	self.searchResult = data;
 		         	$("#loadingImage").hide();
 		            notifyObservers(self.notificationEnum.searchResultUpdate, data);
-		        	}
+		        },
+		        error: function(data){
+		        	notifyObservers(self.notificationEnum.searchLoadingError);
+		        }
          });
    }
 
@@ -219,7 +224,12 @@ var DinnerModel = function() {
 		         	self.setCurrentDish(data);
 
 		         	notifyObservers(self.notificationEnum.individualRecipeUpdate, data);
-		        	}
+		        },
+		        error: function(data){
+		        	console.debug("error getting data yo")
+		        	$("#loadingImage").hide();
+		        	notifyObservers(self.notificationEnum.recipeLoadingError);
+		        }
  		});
    }
 
