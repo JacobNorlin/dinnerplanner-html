@@ -57,10 +57,10 @@ var SideSummaryView = function(container , model){
 							 <td>"+model.getDishPrice(dish)+"SEK </td>"
 		}else{
 			self.mealListView.find("#mealTable").append("<tr id='"+dish.Category+"Row'><td>"+dish.Title+"</td>\
-													 <td>"+model.getDishPrice(dish)+"SEK </td></tr>");
+													 <td>"+model.getDishPrice(dish)*model.getNumberOfGuests()+"SEK </td></tr>");
 		}
 		
-		self.confirmPurchaseView.find("#totalMealCost").html(model.getTotalMenuPrice());
+		self.confirmPurchaseView.find("#totalMealCost").html(model.getTotalMenuPrice()*model.getNumberOfGuests());
 
 	}
 

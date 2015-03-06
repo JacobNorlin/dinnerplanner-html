@@ -45,7 +45,7 @@ var OverviewView = function (container, model) {
 
 		var priceCol =  document.createElement('div');
 		priceCol.className = "col-xs-2 priceDiv";
-		priceCol.innerHTML = model.getDishPrice(dish.id)+" SEK";
+		priceCol.innerHTML = model.getDishPrice(dish.id)*model.getNumberOfGuests()+" SEK";
 
 
 		
@@ -62,7 +62,7 @@ var OverviewView = function (container, model) {
 
 	var totalPriceCol = document.createElement('div');
 	totalPriceCol.className = "col-xs-2 priceDiv totalPriceDiv";
-	totalPriceCol.innerHTML = model.getTotalMenuPrice()+" SEK";
+	totalPriceCol.innerHTML = model.getTotalMenuPrice()*model.getNumberOfGuests()+" SEK";
 	row2.appendChild(totalPriceCol);
 
 	container.append(row);

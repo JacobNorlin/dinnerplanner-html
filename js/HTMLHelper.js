@@ -23,7 +23,7 @@ var HTMLHelper = function(model){
 
 
 	 	var totalRow = document.createElement('tr');
-	 	totalRow.innerHTML = "<td></td><td></td><td><b>Total:</b></td><td>"+model.getDishPrice(dish)+" SEK</td>"
+	 	totalRow.innerHTML = "<td></td><td></td><td><b>Total:</b></td><td>"+model.getDishPrice(dish)*model.getNumberOfGuests()+" SEK</td>"
 	 	recipeTable.appendChild(totalRow);
 
 	 	return recipeTable;

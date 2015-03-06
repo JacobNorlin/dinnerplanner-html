@@ -39,7 +39,7 @@ var SummaryView = function (container, model) {
 			//PRICE
 			var priceCol =  document.createElement('div');
 			priceCol.className = "col-xs-2 priceDiv";
-			priceCol.innerHTML = model.getDishPrice(dish)+" SEK";
+			priceCol.innerHTML = model.getDishPrice(dish)*model.getNumberOfGuests()+" SEK";
 
 			row.appendChild(panelCol);
 			row2.appendChild(priceCol);
@@ -48,7 +48,7 @@ var SummaryView = function (container, model) {
 
 		var totalPriceCol = document.createElement('div');
 		totalPriceCol.className = "col-xs-2 priceDiv totalPriceDiv";
-		totalPriceCol.innerHTML = model.getTotalMenuPrice()+" SEK";
+		totalPriceCol.innerHTML = model.getTotalMenuPrice()*model.getNumberOfGuests()+" SEK";
 		row2.appendChild(totalPriceCol);
 
 		var buttonDiv = self.createButton("btn btn-default btn-lg col-xs-12", "printRecipeButton", "Print full recipe");
