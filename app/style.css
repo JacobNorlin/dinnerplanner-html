@@ -1,0 +1,54 @@
+.recipeCard {
+	border-style: solid;
+	height:240px;
+	width:180px;
+}
+
+
+.recipeName {
+	border-style: solid;
+	background:rgb(255,255,255);
+	position:absolute; 
+	bottom:0;
+	width:180px;
+	left:15px;
+}
+.panel-body {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+h2 {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+	font-size: 24;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.3999996185303px;
+}
+
+
+
+small{
+	font-color:#FFFFFF;
+}
+
+body{
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+}
+
+#pageheader{
+	background: #0f8592;
+	position: relative;
+	padding:20px;
+	color:white;
+}
+
+.searchResults{
+	border-top: 3px solid;
+	padding-top: 30px;
+}
+
+.subTitle{
+	color:white;
+}
