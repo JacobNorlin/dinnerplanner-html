@@ -11,7 +11,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   };
 
   var currentDish;
-  var filterText ="";
+  var lastSearchTerm ="";
   var rpp = 15;
   var scrolls = 1;
 
@@ -25,13 +25,16 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   }
 
 
-  this.setFilterText = function(val){
+  this.setLastSearchTerm = function(val){
     scrolls = 1;
-    filterText = val.toLowerCase();
+    if(!val){
+      return;
+    }
+    lastSearchTerm = val.toLowerCase();
   }
 
-  this.getFilterText = function(val){
-    return filterText;
+  this.getLastSearchTerm = function(val){
+    return lastSearchTerm;
   }
 
 
@@ -80,10 +83,9 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   this.getTotalMenuPrice = function() {
-    var ingredients = self.getAllIngredients();
     var sum = 0;
 
-    $.each(self.selectedDishes, function(index, dish){
+    $.each(self.getFullMenu(), function(index, dish){
       sum+=self.getDishPrice(dish);
     })
 
@@ -92,9 +94,14 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   }
 
   this.getDishPrice = function(dish){
+    //I dint like this
+    if(!dish){
+      return 0;
+    }
     var sum = 0;
+    console.debug(dish);
     $.each(dish.Ingredients, function(index, value){
-      sum += value.Price;
+      sum += value.Price*self.getNumberOfGuests();
     })
     
     
@@ -103,20 +110,33 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
-  this.addDishToMenu = function(id) {
-    var dish = self.getDish(id);
-    selectedDishes[dish["type"]] = id;
+  this.addDishToMenu = function(dish) {
+    console.debug(dish)
+    if(!dish.Ingredients){
+      self.Dish.get({id:dish.RecipeID},
+        function(data){
+          $.each(data.Ingredients, function(index, ingredient){
+            ingredient.Price = 10;
+          });
+
+          data.Price = self.getDishPrice(data); 
+          selectedDishes[dish.Title] = data;
+        }
+      );
+    }else{
+      selectedDishes[dish.Title] = dish;
+    }
+    
   }
 
   //Removes dish from menu
-  this.removeDishFromMenu = function(id) {
-    var dish = self.getDish(id);
-    selectedDishes[dish["type"]] = 0;
+  this.removeDishFromMenu = function(dish) {
+    delete selectedDishes[dish.Title];
   }
 
   var apiKey = "dvxzUl57TpT2oAV9h288wTuTCEEQE8z8";
 
-  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:apiKey});
+  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:5,api_key:apiKey});
   this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:apiKey}); 
 
 

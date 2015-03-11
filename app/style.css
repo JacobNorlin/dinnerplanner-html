@@ -13,6 +13,18 @@
 	width:180px;
 	left:15px;
 }
+
+
+.recipeRow{
+	padding:20px;
+	border-bottom:3px solid;
+	background: #cfdddf;
+}
+
+#dishImage{
+	max-width: 350px;
+}
+
 .panel-body {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -42,6 +54,11 @@ body{
 	position: relative;
 	padding:20px;
 	color:white;
+}
+
+.summaryHeader{
+	border-bottom: 3px solid;
+	padding:15px;
 }
 
 .searchResults{

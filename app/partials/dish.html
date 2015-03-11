@@ -2,15 +2,19 @@
 <ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
 
 <div>
-	{{status}}
+	
 	<!--description-->		
 	<div class="col-xs-5 example-block">
 		<div class="recipeInfo">
+			{{status}}
 			<h2>{{dish.Title}}</h2>
 
-			<img class="img-responsive center-block" ng-src="{{dish.ImageURL}}"/>
+			<img class="center-block dishImage" ng-src="{{dish.ImageURL}}"/>
 
 			{{dish.Description}}
+
+			<a href="#/search/{{getLastSearchTerm()}}" class="btn btn-primary">Go Back</a>
+
 		</div>
   	
 	</div>
@@ -22,18 +26,31 @@
 				INGREDIENTS FOR {{getNumberOfGuests()}} PEOPLE
 			</div>
 			<div class="panel-body">
+				{{status}}
 				<table>
+					<tr>
+						<td><b>Name</b></td>
+						<td><b>Quantity</b></td>
+						<td><b>Price</b></td>
+						<td><b>Unit</b></td>
+					</tr>
 					<tr ng-repeat="ingredient in dish.Ingredients">
 						<td>{{ingredient.Name}}</td>
 						<td>{{ingredient.Quantity*getNumberOfGuests()}}</td>
-						<td>{{ingredient.Price}} SEK<td>
+						<td>{{ingredient.Price*getNumberOfGuests()}} SEK</td>
 						<td>{{ingredient.Unit}}</td>
 					</tr>
 					<tr>
 						<td>Total</td>
 						<td>{{getDishPrice(dish)}}</td>
+					</tr>
 				</table>
 			</div>
+			<br>
+			<button class="btn btn-default btn-lg" ng-click="confirmDish()">
+				Confirm
+			</button>
+
 		</div>
 		 
 	</div>

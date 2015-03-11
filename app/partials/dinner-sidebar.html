@@ -11,4 +11,22 @@
 	this with Total price of the menu -->
 	Total number of guest: {{getNumberOfGuests()}}
 
+	<div>
+		<table class="table">
+			<tr>
+				<td><b>Name</b></td>
+				<td><b>Price</b></td>
+			</tr>
+			<tr ng-repeat="dish1 in fullMenu">
+				<td>{{dish1.Title}}</td>
+				<td>{{getDishPrice(dish1)}} <span class="glyphicon glyphicon-remove" ng-click="removeItem(dish1)"></span></td>
+			</tr>
+		</table>
+
+		<a href="#/overview" class="btn btn-default btn-lg">Confirm</a>
+	</div>
+
+
+
+
 </div>
