@@ -3,20 +3,20 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-dinnerPlannerApp.factory('Dinner',function ($resource) {
+dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
 
   //DinnerModel Object constructor
   var self = this;
-  var selectedDishes = {
-  };
+
 
   var currentDish;
   var lastSearchTerm ="";
   var rpp = 15;
   var scrolls = 1;
+  var selectedDishes = {};
 
 
-  var numberOfGuests = 2;
+  var numberOfGuests = $cookieStore.get('numberOfGuests');
 
 
 
@@ -48,6 +48,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
 
   this.setNumberOfGuests = function(num) {
+    $cookieStore.put('numberOfGuests', num);
     numberOfGuests = num;
   }
 
@@ -111,7 +112,9 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   this.addDishToMenu = function(dish) {
-    console.debug(dish)
+    
+    
+
     if(!dish.Ingredients){
       self.Dish.get({id:dish.RecipeID},
         function(data){
@@ -120,18 +123,40 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
           });
 
           data.Price = self.getDishPrice(data); 
-          selectedDishes[dish.Title] = data;
+          selectedDishes[dish.RecipeID] = data;
+          $cookieStore.put('selectedDishes', cookiefySelectedDishes());
         }
       );
     }else{
-      selectedDishes[dish.Title] = dish;
+      selectedDishes[dish.RecipeID] = dish;
+      $cookieStore.put('selectedDishes', cookiefySelectedDishes());
     }
+    
     
   }
 
+
+
   //Removes dish from menu
   this.removeDishFromMenu = function(dish) {
-    delete selectedDishes[dish.Title];
+    
+    delete selectedDishes[dish.RecipeID];
+    $cookieStore.put('selectedDishes', cookiefySelectedDishes());
+  }
+  //Converts to an object containing all recipeids
+  var cookiefySelectedDishes = function(){
+    var newObj = {};
+    $.each(self.getFullMenu(), function(index, dish){
+      newObj[dish.RecipeID] = {'RecipeID':dish.RecipeID};
+    });
+    return newObj;
+  }
+  //Adds all the saved dishes to menu again
+  var deCookiefySelectedDishes = function(dishes){
+    if(dishes){
+        $.each(dishes, function(index, dish){
+          self.addDishToMenu(dish);
+        });}
   }
 
   var apiKey = "dvxzUl57TpT2oAV9h288wTuTCEEQE8z8";
@@ -139,7 +164,8 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:5,api_key:apiKey});
   this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:apiKey}); 
 
-
+  deCookiefySelectedDishes($cookieStore.get('selectedDishes'));
+  $cookieStore.put('selectedDishes', selectedDishes);
 
 
 
