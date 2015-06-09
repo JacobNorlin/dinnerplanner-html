@@ -7,9 +7,10 @@
 		<!--Contains searchbar-->
 		<div class="col-xs-12">
 			<input ng-model="query"/>
-			<a class="btn btn-defailt btn-lg" ng-href="#/search/{{query}}">Search</a>
+			<a class="btn btn-defailt btn-lg" ng-href="#/search/{{query}}" ng-click="search(query)">Search</a>
 		</div>
-		{{status}}
+		{{status}} 
+
 	</div>
 		<!--Lower portion-->
 	<div class="row searchResults">
@@ -30,6 +31,7 @@
 			</div>
 		</div>
 	</div>
+	<a id="showMoreButton">Show more...</a>
 </div>
 
 
